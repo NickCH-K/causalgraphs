@@ -27,7 +27,7 @@ dffull <- rbind(
   df %>% mutate(mean_Y = ifelse(xaxisTime > 9 & xaxisTime < 11,mean_Y,NA),Y=ifelse(xaxisTime > 9 & xaxisTime < 11,mean_Y,NA),groupLine=NA,state="5. The jump at the cutoff is the effect of treatment."))
 
 
-ggplot(dffull,aes(y=Y,x=xaxisTime))+geom_point()+
+p <- ggplot(dffull,aes(y=Y,x=xaxisTime))+geom_point()+
   geom_vline(aes(xintercept=10),linetype='dashed')+
   geom_point(aes(y=mean_Y,x=groupX),color="red",size=2)+
   geom_vline(aes(xintercept=groupLine))+
@@ -46,4 +46,4 @@ ggplot(dffull,aes(y=Y,x=xaxisTime))+geom_point()+
   ease_aes('sine-in-out')+
   exit_fade()+enter_fade()
 
-  
+animate(p,nframes=175)

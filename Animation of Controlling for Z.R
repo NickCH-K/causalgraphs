@@ -31,12 +31,14 @@ dffull <- rbind(
   #Step 6: Raw demeaned data only
   df %>% mutate(X = X - mean_X,Y = Y - mean_Y,mean_X=NA,mean_Y=NA,time=after_cor))
 
-ggplot(dffull,aes(y=Y,x=X,color=as.factor(W)))+geom_point()+
+p <- ggplot(dffull,aes(y=Y,x=X,color=as.factor(W)))+geom_point()+
   geom_vline(aes(xintercept=mean_X,color=as.factor(W)))+
   geom_hline(aes(yintercept=mean_Y,color=as.factor(W)))+
   guides(color=guide_legend(title="W"))+
   scale_color_colorblind()+
   labs(title = 'The Relationship between Y and X, Controlling for a Binary Variable W \n{next_state}')+
-  transition_states(time,transition_length=c(6,16,6,16,6,6),state_length=c(50,22,12,22,12,50),wrap=FALSE)+
+  transition_states(time,transition_length=c(12,32,12,32,12,12),state_length=c(160,100,75,100,75,160),wrap=FALSE)+
   ease_aes('sine-in-out')+
   exit_fade()+enter_fade()
+
+animate(p,nframes=200)

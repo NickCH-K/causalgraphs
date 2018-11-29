@@ -40,7 +40,7 @@ dffull <- rbind(
 
 
 
-ggplot(dffull,aes(y=Y,x=xaxisTime,color=as.factor(Control)))+geom_point()+
+p <- ggplot(dffull,aes(y=Y,x=xaxisTime,color=as.factor(Control)))+geom_point()+
   guides(color=guide_legend(title="Group"))+
   geom_vline(aes(xintercept=1.5),linetype='dashed')+
   scale_color_colorblind()+
@@ -82,4 +82,4 @@ ggplot(dffull,aes(y=Y,x=xaxisTime,color=as.factor(Control)))+geom_point()+
   ease_aes('sine-in-out')+
   exit_fade()+enter_fade()
 
-
+animate(p,nframes=150)

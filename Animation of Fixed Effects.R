@@ -28,12 +28,14 @@ dffull <- rbind(
   #Step 6: Raw demeaned data only
   df %>% mutate(X = X - mean_X,Y = Y - mean_Y,mean_X=NA,mean_Y=NA,time=after_cor))
 
-ggplot(dffull,aes(y=Y,x=X,color=as.factor(Person)))+geom_point()+
+p <- ggplot(dffull,aes(y=Y,x=X,color=as.factor(Person)))+geom_point()+
   geom_vline(aes(xintercept=mean_X,color=as.factor(Person)))+
   geom_hline(aes(yintercept=mean_Y,color=as.factor(Person)))+
   guides(color=guide_legend(title="Individual"))+
   scale_color_colorblind()+
   labs(title = 'The Relationship between Y and X, with Individual Fixed Effects \n{next_state}')+
-  transition_states(time,transition_length=c(6,16,6,16,6,6),state_length=c(50,22,12,22,12,50),wrap=FALSE)+
+  transition_states(time,transition_length=c(12,32,12,32,12,12),state_length=c(160,100,75,100,75,160),wrap=FALSE)+
   ease_aes('sine-in-out')+
   exit_fade()+enter_fade()
+
+animate(p,nframes=200)

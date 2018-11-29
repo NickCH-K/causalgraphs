@@ -42,7 +42,7 @@ dffull <- rbind(
   df %>% mutate(Y = NA,bins=NA,state="6. The treatment effect is the remaining difference."))
 
 
-ggplot(dffull,aes(y=Y,x=xaxisTime,color=Treated,size=Treated))+geom_point()+
+p <- ggplot(dffull,aes(y=Y,x=xaxisTime,color=Treated,size=Treated))+geom_point()+
   geom_vline(aes(xintercept=bins))+
   geom_hline(aes(yintercept=mean_Y,color=Treated))+
   geom_segment(aes(x=.5,xend=.5,
@@ -57,4 +57,4 @@ ggplot(dffull,aes(y=Y,x=xaxisTime,color=Treated,size=Treated))+geom_point()+
   ease_aes('sine-in-out')+
   exit_fade()+enter_fade()
 
-  
+animate(p,nframes=200)

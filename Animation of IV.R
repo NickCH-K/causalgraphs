@@ -33,7 +33,7 @@ endpts <- df %>%
   group_by(Z) %>%
   summarize(mean_X=mean(mean_X),mean_Y=mean(mean_Y))
 
-ggplot(dffull,aes(y=Y,x=X,color=as.factor(Z)))+geom_point()+
+p <- ggplot(dffull,aes(y=Y,x=X,color=as.factor(Z)))+geom_point()+
   geom_vline(aes(xintercept=mean_X,color=as.factor(Z)))+
   geom_hline(aes(yintercept=mean_Y,color=as.factor(Z)))+
   guides(color=guide_legend(title="Z"))+
@@ -46,3 +46,4 @@ ggplot(dffull,aes(y=Y,x=X,color=as.factor(Z)))+geom_point()+
   ease_aes('sine-in-out')+
   exit_fade()+enter_fade()
 
+animate(p,nframes=175)
